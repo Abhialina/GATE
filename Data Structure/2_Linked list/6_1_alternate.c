@@ -4,20 +4,34 @@ struct node{
     int data;
     struct node *next;
 };
-int alternate(struct node *ptr){
-    if(ptr == NULL){
-        return 0;
+struct node *start = NULL;
+
+void alternate_1(){
+    struct node *ptr = start;
+    int count = 1;
+    while(ptr != NULL){
+        if(count % 2 == 1){
+            printf("%d ", ptr->data);
+        }
+        ptr = ptr->next;
+        count++;
     }
-    if(ptr->next == NULL){
-        printf("%d", ptr->data);
-    }
-    while(ptr != NULL && ptr->next != NULL){
-        printf("%d ", ptr->data);
-        ptr = ptr->next->next;
+    printf("\n");
+}
+void alternate_2(){
+    struct node *ptr = start;
+    int count = 1;
+    while(ptr != NULL){
+        if(count % 2 == 0){
+            printf("%d ", ptr->data);
+        }
+        ptr = ptr->next;
+        count++;
     }
 }
+
 void main(){
-    struct node *start, *one, *two, *three, *four, *five, *six;
+    struct node *one, *two, *three, *four, *five, *six;
     one = malloc(sizeof(struct node));
     two = malloc(sizeof(struct node));
     three = malloc(sizeof(struct node));
@@ -35,9 +49,10 @@ void main(){
     four->next = five;
     five->data = 50;
     five->next = six;
-    six->data = 69;
+    six->data = 60;
     six->next = NULL;
     start = one;
 
-    alternate(start);
+    alternate_1();
+    alternate_2();
 }
