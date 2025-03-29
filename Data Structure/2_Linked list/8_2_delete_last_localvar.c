@@ -45,6 +45,9 @@ void main(){
     four->next = NULL;
 
     start = one;
+    printf("Before delete : ");
+    display(start);
+    printf("\nAfter delete : ");
     delete(&start);
     display(start);
 }

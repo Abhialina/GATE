@@ -6,22 +6,16 @@ struct node{
 };
 struct node *start = NULL;
 
-int mid_node(){
-    struct node *ptr = start;
-    int c = 0;
-    while(ptr != NULL){
-        c++;
-        ptr = ptr->next;
+int loop(){
+    struct node *slow = start, *fast = start;
+    while(fast != NULL && fast->next != NULL){
+        slow = slow->next;
+        fast = fast->next->next;
+        if(slow == fast){
+            return 1;
+        }
     }
-    c /= 2;
-    if(c == 0){
-        return 0;
-    }
-    ptr = start;
-    for(int i = 1; i <= c; i++){
-        ptr = ptr->next;
-    }
-    printf("\nMid node : %d", ptr->data);
+    return 0;
 }
 void display(){
     struct node *ptr = start;
@@ -31,12 +25,13 @@ void display(){
     }
 }
 void main(){
-    struct node *one, *two, *three, *four, *five;
+    struct node *one, *two, *three, *four, *five, *six;
     one = malloc(sizeof(struct node));
     two = malloc(sizeof(struct node));
     three = malloc(sizeof(struct node));
     four = malloc(sizeof(struct node));
     five = malloc(sizeof(struct node));
+    six = malloc(sizeof(struct node));
 
     one->data = 10;
     one->next = two;
@@ -47,9 +42,11 @@ void main(){
     four->data = 40;
     four->next = five;
     five->data = 50;
-    five->next = NULL;
+    five->next = six;
+    six->data = 60;
+    six->next = three;
 
     start = one;
-    display();
-    mid_node();
+    loop();
+    //display();
 }
